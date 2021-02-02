@@ -2,6 +2,7 @@ package writer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Rectangle;
+import org.json.simple.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,7 +15,9 @@ public class JsonWriter {
     public static void writeToFile(List<Rectangle> rectangleList, String pathToFile) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File(pathToFile), rectangleList);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("rects", rectangleList);
+            objectMapper.writeValue(new File(pathToFile), jsonObject);
         } catch (IOException e) {
             e.printStackTrace();
         }
