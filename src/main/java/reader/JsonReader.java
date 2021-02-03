@@ -26,10 +26,14 @@ public class JsonReader {
                 JSONObject obj = (JSONObject) iterator.next();
 
                 Rectangle rectangle = new Rectangle();
-                rectangle.setX1((Double) obj.get("x1"));
-                rectangle.setX2((Double) obj.get("x2"));
-                rectangle.setY1((Double) obj.get("y1"));
-                rectangle.setY2((Double) obj.get("y2"));
+                double x1 = (Double) obj.get("x1");
+                double x2 = (Double) obj.get("x2");
+                double y1 = (Double) obj.get("y1");
+                double y2 = (Double) obj.get("y2");
+                rectangle.setX1(Math.min(x1, x2));
+                rectangle.setX2(Math.max(x1, x2));
+                rectangle.setY1(Math.max(y1, y2));
+                rectangle.setY2(Math.min(y1, y2));
 
                 rectangleList.add(rectangle);
             }
